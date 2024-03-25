@@ -15,29 +15,59 @@ const songs = [
     { title: "Cant Tell Me Nothing", artist: "Kanye West", genre: "Hip Hop" },
     { title: "Imithandazo", artist: "Kabza de Small", genre: "Amapiano" },
     { title: "Amazwe", artist: "Kabza de Small", genre: "Amapiano" },
-    { title: "018", artist: "Cassper Nyovest", genre: "Hip Hop" },
+    { title: "018", artist: "Cassper Nyovest", genre: "Hip Hop" }, 
+    { title: "Kwelinye", artist: "Mellow & Sleazy", genre: "Amapiano" }, 
+    { title: "All Things", artist: "Kirk Franklin", genre: "Gospel" },   
     
-    // Feel free to add even more songs
+    
 ];
-
-
-// Object containing each Guardian's preferred genre
 const guardians = {
     "Star-Lord": "Rock",
     "Gamora": "Pop",
     "Drax": "R&B",
     "Rocket": "Amapiano",
-    "Groot": "Hip Hop"
-    // Add preferences for Drax, Rocket, and Groot
+    "Groot": "Hip Hop",
+    "Joseph": "Gospel"    
 };
 
 // Function to generate playlist based on preferred genre
 function generatePlaylist(guardians, songs) {
-    // Use the map() function to create playlists for each Guardian
-    // Your code here
+
+    for (const guardian in guardians) {
+        const musicGenre = guardians[guardian];       
+
+        let guardianPlayList = songs.map(song => 
+            {if (song.genre == musicGenre) { 
+                return (`${song.title} by ${song.artist}`)
+             } 
+            
+        }).filter(song => song !== undefined);  
+        
+        let playListsDivEl = document.getElementById('playlists');
+
+        
+        let guardianPlayListDivEl = document.createElement('div')  
+        let guardianPlayListDivElheading = document.createElement('h1')
+        guardianPlayListDivElheading.textContent = `${guardian}'s PlayList`
+        let guardianPlayListDivElList = document.createElement('ul')
+        guardianPlayListDivEl.className = 'playlist';        
+        
+        guardianPlayListDivEl.textContent = guardianPlayList  
+        guardianPlayListDivEl.appendChild(guardianPlayListDivElheading )
+        playListsDivEl.appendChild(guardianPlayListDivEl)        
+        guardianPlayListDivEl.appendChild(guardianPlayListDivElList)       
+        
+    }   
+   
 }
 
 // Call generatePlaylist and display the playlists for each Guardian
 generatePlaylist(guardians, songs);
 
-
+/*
+let playListsDivEl = document.getElementById('playlists');
+let guardianPlayListDivEl = document.createElement('div')  
+guardianPlayListDivEl.className = 'playlist';
+guardianPlayListDivEl.textContent = "Hi"   
+playListsDivEl.appendChild(guardianPlayListDivEl) 
+*/
