@@ -25,6 +25,7 @@ const songs = [
     
 ];
 
+// guardians genre preference
 const guardians = {
     "Star-Lord": "Rock",
     "Gamora": "Pop",
@@ -41,8 +42,9 @@ const guardians = {
 function generatePlaylist(guardians, songs) {
 
     for (const guardian in guardians) {
-        const musicGenre = guardians[guardian];       
-
+        const musicGenre = guardians[guardian]; 
+      
+        // Obtain songs based on preferred genre
         let guardianPlayList = songs.map(song => {
             if (song.genre === musicGenre) { 
                 const songTitleSpan = document.createElement('span');
@@ -50,13 +52,13 @@ function generatePlaylist(guardians, songs) {
                 songTitleSpan.textContent = song.title;
                 return `${songTitleSpan.outerHTML} by ${song.artist}`;
             } 
-        }).filter(song => song !== undefined);  
+        }).filter(song => song !== undefined);   // Returns an array with no undefined
         
         let playListsDivEl = document.getElementById('playlists');
         
         let guardianPlayListDivEl = document.createElement('div');  
         let guardianPlayListDivElheading = document.createElement('h1'); 
-        let guardianPlayListUnorderedList = document.createElement('ul');
+        let guardianPlayListUnorderedList = document.createElement('ul'); // Unorded list element to display songs by genre
 
         guardianPlayListDivEl.className = 'playlist';  
         guardianPlayListUnorderedList.className = 'guardian-playlist';
@@ -69,7 +71,8 @@ function generatePlaylist(guardians, songs) {
             guardianPlayListUnorderedListItem.innerHTML = song;
             guardianPlayListUnorderedList.appendChild(guardianPlayListUnorderedListItem);
         });
-        
+
+        // Appends various elements to parent elements
         guardianPlayListDivEl.appendChild(guardianPlayListDivElheading);
         guardianPlayListDivEl.appendChild(guardianPlayListUnorderedList);          
         playListsDivEl.appendChild(guardianPlayListDivEl);
